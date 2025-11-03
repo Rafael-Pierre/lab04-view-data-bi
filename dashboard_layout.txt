@@ -1,0 +1,18 @@
+
+Dashboard layout suggestions (pages and visuals):
+
+Page 1 - Caracterizacao do Dataset
+- Cards: Total Accidents (13 rows in cleaned CSV), Total Deaths (SUM mortos), Total Vehicles (SUM veiculos)
+- Bar chart: Accidents per Year (axis: year)
+- Map: Points by latitude/longitude (use latitude & longitude); tooltip: uf, municipio, mortos, feridos
+- Table: Top 10 municipalities by number of accidents
+
+Page 2 - Perguntas de Pesquisa (RQs)
+- Line chart: Monthly trend (axis: month_year)
+- Bar chart: Deaths by State (axis: uf)
+- Stacked bar or donut: Accident types (tipo_acidente) distribution
+- Heatmap: Hour of day vs Day of week (count of accidents)
+
+Notes:
+- The Power Query script in 'powerquery_script_m.txt' is a generic starting point; update the file path to your CSV in Power BI's Advanced Editor.
+- The cleaned CSV 'clean_accidents.csv' includes parsed date/year/month and normalized uf/municipio columns.

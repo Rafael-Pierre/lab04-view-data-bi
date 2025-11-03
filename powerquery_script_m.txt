@@ -1,0 +1,12 @@
+let
+    Fonte = Csv.Document(File.Contents("C:\path\to\arquivomenorcomcolunas.csv"),[Delimiter=",", Columns=27, Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+    Promoted = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    ChangedTypes = Table.TransformColumnTypes(Promoted,{{"data_inversa", type date}, {"horario", type time}, {"km", type number}, {"pessoas", Int64.Type}, {"mortos", Int64.Type}, {"feridos", Int64.Type}, {"veiculos", Int64.Type}, {"latitude", type number}, {"longitude", type number}}),
+    Trimmed = Table.TransformColumns(ChangedTypes,{{"uf", Text.Trim}, {"municipio", Text.Trim}}),
+    AddedYear = Table.AddColumn(Trimmed, "year", each Date.Year([data_inversa]), Int64.Type),
+    AddedMonth = Table.AddColumn(AddedYear, "month", each Date.Month([data_inversa]), Int64.Type),
+    AddedMonthYear = Table.AddColumn(AddedMonth, "month_year", each Text.PadStart(Text.From(Date.Month([data_inversa])),2,"0") & "-" & Text.From(Date.Year([data_inversa]))),
+    AddedHour = Table.AddColumn(AddedMonthYear, "hour", each Time.Hour(Time.From([horario])), Int64.Type),
+    AddedFatal = Table.AddColumn(AddedHour, "fatal_accident", each if Record.HasFields(_, "mortos") and Number.From(Record.Field(_, "mortos")) > 0 then true else false, type logical)
+in
+    AddedFatal

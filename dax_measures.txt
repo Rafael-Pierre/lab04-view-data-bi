@@ -1,0 +1,17 @@
+
+-- DAX measures suggested for the dataset (paste into Power BI's Modeling > New measure)
+Total Accidents = COUNTROWS('Table')
+
+Total Deaths = SUM('Table'[mortos])
+
+Fatal Accidents = CALCULATE(COUNTROWS('Table'), FILTER('Table', 'Table'[mortos] > 0))
+
+Avg Deaths per Accident = DIVIDE([Total Deaths], [Total Accidents], 0)
+
+Accidents by Year = COUNTROWS('Table')  -- use Year column as axis
+
+Accidents (Month-Year) = COUNTROWS('Table') -- use month_year column as axis
+
+Deaths by State = SUM('Table'[mortos]) -- use 'uf' as axis
+
+% Fatal Accidents = DIVIDE([Fatal Accidents], [Total Accidents], 0)
