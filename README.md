@@ -7,3 +7,5 @@ RQ1: Qual é a relação entre o tipo de acidente e os períodos do ano (estaç�
 
 RQ2: Quais estados registram mais acidentes e qual é a gravidade média em cada um deles?
 → Permite identificar regiões críticas e priorizar ações de segurança.
+
+O relatório final deste trabalho pode ser visto no arquivo [lab4.pdf](/lab4.pdf)
